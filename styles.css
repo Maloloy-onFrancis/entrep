@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  scrollbar-color: #d2691e #ffe4b5;
+  scrollbar-width: thin;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #ffe4b5;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #d2691e;
+  border-radius: 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #f7e6c4;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d2691e;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #d2691e;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ff8c00;
+}
+
+#home {
+  height: 100vh;
+  background-image: url('image/waffle.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ff8c00;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.home-content h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.home-content p {
+  font-size: 18px;
+}
+
+.section {
+  padding: 40px 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  background: #fff4e6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.text {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.text h2 {
+  margin-bottom: 10px;
+  color: #d2691e;
+}
+
+.text p {
+  color: #333;
+}
+
+.image {
+  flex: 1;
+  text-align: center;
+}
+
+.image img {
+  width: 100%;
+  max-width: 350px; /* Control max width */
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s;
+}
+
+.image img:hover {
+  transform: scale(1.1);
+}
+
+.learn-more-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #d2691e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  background-color: #ff8c00;
+}
+
+.video-section {
+  text-align: center;
+  background: #f7e6c4;
+  padding: 40px 20px;
+}
+
+.video-section video {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #d2691e;
+  color: white;
+}

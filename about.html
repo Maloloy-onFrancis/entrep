@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waffledable - Delicious Waffles for You</title>
+    <link rel="icon" href="image/favicon.ico" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff7e6;
+        }
+        header {
+            background-color: #f4a261;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            width: 40px;
+            height: auto;
+        }
+        .title {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            gap: 10px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fbd786;
+        }
+        .hero h1 {
+            font-size: 3em;
+            color: #e76f51;
+        }
+        .hero p {
+            font-size: 1.2em;
+            color: #6d6875;
+        }
+        .btn {
+            background-color: #e76f51;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #d45740;
+            transform: scale(1.05);
+        }
+        section {
+            padding: 30px 20px;
+        }
+        section h2 {
+            color: #e76f51;
+        }
+        .box {
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #f4a261;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .menu {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .menu-item {
+            text-align: center;
+            flex-shrink: 0;
+            width: 200px;
+        }
+        .menu-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .menu-item img:hover {
+            transform: scale(1.1);
+        }
+        .menu-item .price {
+            font-size: 1.2em;
+            color: #e76f51;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #2a9d8f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+            max-height: 80%;
+            margin: auto;
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #000;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .members-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .member-card {
+            background-color: #fff;
+            padding: 20px;
+            border: 2px solid #f4a261;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .member-card h3 {
+            font-size: 1.5em;
+            color: #e76f51;
+        }
+        .member-card p {
+            font-size: 1.2em;
+            color: #6d6875;
+        }
+        .member-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .title {
+                font-size: 1.5em;
+                margin-top: 10px;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .menu-item {
+                width: 150px;
+            }
+            .members-section {
+                padding: 20px 10px;
+            }
+            .member-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="image/logo.jpg" alt="Waffledable Logo" class="logo">
+        <div class="title">Waffledable</div>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#mission">Mission</a>
+            <a href="#vision">Vision</a>
+            <a href="#menu">Menu</a>
+            <a href="#order">Order Online</a>
+            <a href="#members">Members</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Waffles Made with Love, Just for You!</h1>
+        <p>Deliciously crafted waffles for every craving.</p>
+        <button class="btn">Explore Our Menu</button>
+    </div>
+
+    <section id="about">
+        <div class="box">
+            <h2>About Us</h2>
+            <p>Welcome to Waffledable, where every bite is an unforgettable delight! We're a proudly homegrown waffle business, passionate about crafting mouthwatering treats that blend comfort, creativity, and indulgence. At Waffledable, we believe waffles are more than just food—they're moments of joy. Our menu is packed with deliciously crisp, golden waffles paired with irresistible toppings, from classic flavors to bold, modern twists. Whether you're craving something sweet, savory, or a mix of both, we've got the perfect waffle for you. We're all about quality and care, using only fresh, premium ingredients to ensure every bite is as delightful as the last. Perfect for breakfast, snacks, or desserts, Waffledable is here to brighten your day one waffle at a time. Come taste the magic and make life Waffledable</p>
+        </div>
+    </section>
+
+    <section id="mission">
+        <div class="box">
+            <h2>Our Mission</h2>
+            <p>
+                At Waffledable, our mission is to create moments of joy through every bite. We are dedicated to serving waffles that are not just delicious but also crafted with love and the finest ingredients. Our goal is to bring people together, one waffle at a time, by offering a menu that celebrates creativity, quality, and the simple pleasure of indulging in comfort food. We aim to be the go-to destination for waffle lovers, where every flavor tells a story, every visit feels like home, and every experience is truly Waffledable!</p>
+        </div>
+    </section>
+
+    <section id="vision">
+        <div class="box">
+            <h2>Our Vision</h2>
+            <p>
+                At Waffledable, we envision becoming a beloved name in the world of comfort food, known for redefining how people experience waffles. We strive to be a place where creativity meets quality, offering a diverse range of flavors that delight every palate. Our vision is to grow into a community-centered brand that spreads joy, fosters connections, and inspires sweet moments in every corner we serve. We aspire to make Waffledable not just a treat but a tradition—a part of everyone's happiest memories</p>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <img src="image/butter.jpg" alt="Classic Buttered Waffle" onclick="openModal(this)">
+                <h3>Classic Buttered Waffle</h3>
+                <p>A simple, golden waffle served with a dollop of butter and syrup.</p>
+                <div class="price">₱25</div>
+            </div>
+            <div class="menu-item">
+                <img src="image/vanilla.jpg" alt="Vanilla Bean Delight" onclick="openModal(this)">
+                <h3>Vanilla Bean Delight</h3>
+                <p>Infused with real vanilla for a fragrant and sweet treat.</p>
+                <div class="price">₱25</div>
+            </div>
+            <div class="menu-item">
+                <img src="image/oreo.jpg" alt="Oreo Crush Waffle" onclick="openModal(this)">
+                <h3>Oreo Crush Waffle</h3>
+                <p>Waffle topped with crushed Oreos and drizzled with chocolate syrup.</p>
+                <div class="price">₱40</div>
+            </div>
+            <div class="menu-item">
+                <img src="image/Blueberry Dream.webp" alt="BlueberryDream" onclick="openModal(this)">
+                <h3>Blueberry Dream</h3>
+                <p>Fresh blueberries and a touch of cream, for the perfect fruity waffle.</p>
+                <div class="price">₱40</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order">
+        <h2>Order Online</h2>
+        <button class="btn">Order Now</button>
+    </section>
+
+    <section id="members" class="members-section">
+        <h2>Our Members</h2>
+        <div class="members">
+            <div class="member-card">
+                <h3>HUGO, Roel Jr. C.</h3>
+                <p>Leader</p>
+            </div>
+            <div class="member-card">
+                <h3>HILIGAN, Jaymarei E.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>LABORA, Real James</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>LANGUIDO, Sam Lorenz</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>LASTIMA, Shanti A.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>LOPEZ, Jason Ralph G.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MACAPAGAL JR, Diosdado Nikolai P.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MALOLOY-ΟΝ, Francis Anthony B.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MANGUBAT, Lalyn L.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MARATAS, Sophia Marianne</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MENDEZ, Lorraine Brigette A.</h3>
+                <p>Member</p>
+            </div>
+            <div class="member-card">
+                <h3>MINGUETO, Irah Shane M.</h3>
+                <p>Member</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: info@waffledable.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Follow us on social media for updates!</p>
+    </section>
+
+    <footer>
+        <p>© 2024 Waffledable. All rights reserved.</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="" alt="Waffle Image">
+        </div>
+    </div>
+
+    <script>
+        function openModal(image) {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            modal.style.display = "flex";
+            modalImage.src = image.src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+</html>
